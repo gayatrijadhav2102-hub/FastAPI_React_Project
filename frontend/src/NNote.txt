@@ -1,0 +1,80 @@
+import logo from './logo.svg';
+import './App.css';
+import { useState } from 'react';
+
+function App() {
+  const [items, setItems] = useState(["apple", "mango"])
+  const [inputvalue, setInputvalue] = useState("")
+
+  const handleitem = () => {
+    setItems([...items, inputvalue])
+    setInputvalue("")
+  }
+
+  return (
+    <>
+      <input type="text"
+        value={inputvalue}
+        onChange={(e) => setInputvalue(e.target.value)}
+        placeholder="enter fruit name" />
+      <button onClick={handleitem}>Add</button>
+
+      <ul>
+        {
+          items.map((fruit, index) => (
+            <li key={index}>{fruit}</li>
+          ))
+        }
+      </ul>
+    </>
+  )
+}
+
+export default App;
+----------------------------------------------------- 
+
+import logo from './logo.svg';
+import './App.css';
+import { useState } from 'react';
+
+function App() {
+  const [items, setItems] = useState([])
+  const [nameValue, setnamevalue] = useState("")
+  const [descValue, setDesc] = useState("")
+
+  const handleitem = (e) => {
+    e.preventDefault()
+    setItems([...items, { nameValue: nameValue, descValue: descValue }])
+    setnamevalue("")
+    setDesc("")
+  }
+  return (
+    <>
+      <form onSubmit={handleitem}>
+        <input value={nameValue} onChange={(e) => setnamevalue(e.target.value)} />
+        <input value={descValue} onChange={(e) => setDesc(e.target.value)} />
+
+        <button type="submit">Add</button>
+      </form>
+
+      <h3>Array Output:</h3>
+      {/* {items.map((item, i) => (
+        <p key={i}>{item}</p>
+      ))} */}
+
+      {items.map((item, index) => ( // if you are passing array 
+        <div key={index}>
+          <p>Name: {item.nameValue}</p>
+          <p>Description: {item.descValue}</p>
+        </div>
+      ))}
+    </>
+  )
+
+
+}
+
+export default App;
+
+-------------------------------------------------------------------------
+
